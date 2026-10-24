@@ -1,5 +1,4 @@
-
-import { Routes, Route } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 
 import MainLayout from "../layouts/MainLayout";
 import LoginLayout from "../layouts/LoginLayout";
@@ -10,19 +9,38 @@ import Product from "../pages/Products";
 import Contact from "../pages/Contact";
 import LoginForm from "../Login/login";
 
-export default function AppRoutes() {
-  return (
-    <Routes>
-      <Route path="/" element={<MainLayout />}>
-        <Route index element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="product" element={<Product />} />
-        <Route path="contact" element={<Contact />} />
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <MainLayout />,
+    children: [
+      {
+        index: true,
+        element: <Home />
+      },
+      {
+        path: "about",
+        element: <About />
+      },
+      {
+        path: "product",
+        element: <Product />
+      },
+      {
+        path: "contact",
+        element: <Contact />
+      },
+      {
+        element: <LoginLayout />,
+        children: [
+          {
+            path: "login",
+            element: <LoginForm />
+          }
+        ]
+      }
+    ]
+  }
+]);
 
-        <Route element={<LoginLayout />}>
-          <Route path="login" element={<LoginForm />} />
-        </Route>
-      </Route>
-    </Routes>
-  );
-}
+export default router;

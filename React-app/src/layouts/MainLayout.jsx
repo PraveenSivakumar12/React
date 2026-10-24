@@ -15,7 +15,7 @@ export default function MainLayout() {
 
           <button
             type="button"
-            onClick={() => navigate("/login")}
+            onClick={() => navigate("login")}
           >
             Login
           </button>
